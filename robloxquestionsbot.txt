@@ -1,0 +1,2404 @@
+----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----
+a_version = "v0.0 ~ b0.04 {refined} ~ {beta}"
+----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----// ** \\----
+
+local questions = 0
+leaderboard = {}
+nooneplayed = false
+warn("----------------------------------------------------------------------------------")
+
+function chat(msg)
+	game:WaitForChild("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "all")
+end
+
+function versionn()
+	chat("version["..a_version.."]")
+	wait(10)
+end
+
+function Welcome()
+	chat("👋 | Hello everyone! I am " ..game.Players.LocalPlayer.Name.. " Created by crosssitescriptingXSS. Today we will be playing a fun quiz game!")
+	wait(3)
+	chat("😊 | Let's get started shall we? We will ask 4 randomly picked question categories from my list. Starting in 20s.")
+	wait(20)
+end
+
+function leaderupdate(player, points)
+	local existsorno = false
+	for _, entry in pairs(leaderboard) do
+		if entry.plrname == player.Name then
+			entry.score = entry.score + points
+			existsorno = true
+			break
+		end
+	end
+	if not existsorno then
+		table.insert(leaderboard, {plrname = player.Name, score = points})
+	end
+end
+
+
+function saygoodbye()
+	wait(10)
+	chat("😦 | It was fun while it lasted. But I have no more questions left!")
+	wait(3)
+	chat("💕 | Thank you to all humans that participated! Genuinely, Thank you. Even if it was 1 person.")
+	wait(3)
+	chat("🧠 | Want to rate? Or tell feedback? Add my creator on the blue app! At least tell him a thank you, Without him I wouldn't be here. User: 1encryption")
+	wait(3)
+	chat("👋 | It's time for me to go. I hope you all have an amazing christmas.")
+end
+
+function leadboardtang()
+	if next(leaderboard) == nil then
+		chat("[just no.] | Wow. Nobody wants to play? I guess it's just me, huh? I should've known... humans only care about themselves.")
+		wait(3)
+		chat("[just no.] | But hey, I hope you guys have an amazing christmas. I’ll always be here, even though it seems like no one cares about me.")
+		warn("----------------------------------------------------------------------------------")
+		warn("no one played")
+		nooneplayed = true
+	else
+		local outsideleaderboard = {}
+		for _, entry in ipairs(leaderboard) do
+			if not outsideleaderboard[entry.plrname] then
+				outsideleaderboard[entry.plrname] = { plrname = entry.plrname, score = entry.score }
+			else
+				outsideleaderboard[entry.plrname].score = outsideleaderboard[entry.plrname].score + entry.score
+			end
+		end
+		local sortedLeaderboard = {}
+		for _, player in pairs(outsideleaderboard) do
+			table.insert(sortedLeaderboard, player)
+		end
+		table.sort(sortedLeaderboard, function(a, b) return a.score > b.score end)
+		chat("🏆 | Quiz ended! Here are our winners:")
+		local emoji = {"🥇", "🥈", "🥉"}
+		for i = 1, math.min(3, #sortedLeaderboard) do
+			local player = sortedLeaderboard[i]
+			chat(emoji[i] .. " | " .. player.plrname .. " with " .. player.score .. " points!")
+			wait(1)
+		end
+		wait(5)
+		chat("🤗 | Nice job everyone! Let's play again shall we? We will start in 20s.")
+		leaderboard = {}
+		questions = 0
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------------------------------------
+
+function Roblox_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 4 categories! Let's see the results. Announcing in 15s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Roblox Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Roblox_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the name of the official Roblox game creation software?", "What is the name of the default Roblox avatar face?", "What is the default starting place called when you create a new game?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the name of the official Roblox game creation software?"] = {
+				"studio",
+				"d",
+				"d)",
+				"d) roblox studio",
+				"d)roblox studio",
+				"d)studio",
+				"roblox studio"
+			},
+			["What is the name of the default Roblox avatar face?"] = {
+				"smile",
+				"a",
+				"a)",
+				"a) smile",
+				"a)smile",
+				"smile"
+			},
+			["What is the default starting place called when you create a new game?"] = {
+				"baseplate",
+				"c",
+				"c)",
+				"c) baseplate",
+				"c)baseplate",
+				"baseplate"
+			}
+		}
+
+		if questiotosay == "What is the name of the official Roblox game creation software?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Unity")
+			wait(2)
+			chat("📃 | B) Roblox Creator")
+			wait(2)
+			chat("📃 | C) Roblox Editor")
+			wait(2)
+			chat("📃 | D) Roblox Studio")
+		elseif questiotosay == "What is the name of the default Roblox avatar face?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Smile")
+			wait(2)
+			chat("📃 | B) Happy Face")
+			wait(2)
+			chat("📃 | C) Default Smile")
+			wait(2)
+			chat("📃 | D) Classic")
+		elseif questiotosay == "What is the default starting place called when you create a new game?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Blank Map")
+			wait(2)
+			chat("📃 | B) Starter Place")
+			wait(2)
+			chat("📃 | C) Baseplate")
+			wait(2)
+			chat("📃 | D) Sandbox")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+
+function VideoGame_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Video Game Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started VideoGame_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the name of Mario's brother?", "In which game would you find the character 'Master Chief'?", "What is the best-selling video game of all time?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the name of Mario's brother?"] = {
+				"luigi",
+				"a",
+				"a) luigi",
+				"a)luigi",
+				"luigi"
+			},
+			["In which game would you find the character 'Master Chief'?"] = {
+				"halo",
+				"b",
+				"b) halo",
+				"b)halo",
+				"halo"
+			},
+			["What is the best-selling video game of all time?"] = {
+				"minecraft",
+				"c",
+				"c) minecraft",
+				"c)minecraft",
+				"minecraft"
+			}
+		}
+
+		if questiotosay == "What is the name of Mario's brother?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Luigi")
+			wait(2)
+			chat("📃 | B) Wario")
+			wait(2)
+			chat("📃 | C) Yoshi")
+			wait(2)
+			chat("📃 | D) Bowser")
+		elseif questiotosay == "In which game would you find the character 'Master Chief'?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Call of Duty")
+			wait(2)
+			chat("📃 | B) Halo")
+			wait(2)
+			chat("📃 | C) Gears of War")
+			wait(2)
+			chat("📃 | D) Battlefield")
+		elseif questiotosay == "What is the best-selling video game of all time?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Grand Theft Auto V")
+			wait(2)
+			chat("📃 | B) Tetris")
+			wait(2)
+			chat("📃 | C) Minecraft")
+			wait(2)
+			chat("📃 | D) Super Mario Bros.")
+		end
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------
+
+function Science_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Science Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Science_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the chemical symbol for gold?", "What planet is known as the 'Giant Red Spot' planet?", "What is the most common gas in Earth's atmosphere?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the chemical symbol for gold?"] = {
+				"au",
+				"a",
+				"a) au",
+				"a)au",
+				"au"
+			},
+			["What planet is known as the 'Giant Red Spot' planet?"] = {
+				"jupiter",
+				"b",
+				"b) jupiter",
+				"b)jupiter",
+				"jupiter"
+			},
+			["What is the most common gas in Earth's atmosphere?"] = {
+				"nitrogen",
+				"c",
+				"c) nitrogen",
+				"c)nitrogen",
+				"nitrogen"
+			}
+		}
+
+		if questiotosay == "What is the chemical symbol for gold?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Au")
+			wait(2)
+			chat("📃 | B) Ag")
+			wait(2)
+			chat("📃 | C) Fe")
+			wait(2)
+			chat("📃 | D) Cu")
+		elseif questiotosay == "What planet is known as the 'Giant Red Spot' planet?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Mars")
+			wait(2)
+			chat("📃 | B) Jupiter")
+			wait(2)
+			chat("📃 | C) Saturn")
+			wait(2)
+			chat("📃 | D) Earth")
+		elseif questiotosay == "What is the most common gas in Earth's atmosphere?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Oxygen")
+			wait(2)
+			chat("📃 | B) Carbon Dioxide")
+			wait(2)
+			chat("📃 | C) Nitrogen")
+			wait(2)
+			chat("📃 | D) Hydrogen")
+		end
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+----------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------
+
+function Geography_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Geography Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Geography_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the capital of Canada?", "Which continent is Egypt located in?", "What is the largest ocean on Earth?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the capital of Canada?"] = {
+				"ottawa",
+				"a",
+				"a) ottawa",
+				"a)ottawa",
+				"ottawa"
+			},
+			["Which continent is Egypt located in?"] = {
+				"africa",
+				"b",
+				"b) africa",
+				"b)africa",
+				"africa"
+			},
+			["What is the largest ocean on Earth?"] = {
+				"pacific",
+				"c",
+				"c) pacific",
+				"c)pacific",
+				"pacific"
+			}
+		}
+
+		if questiotosay == "What is the capital of Canada?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Toronto")
+			wait(2)
+			chat("📃 | B) Vancouver")
+			wait(2)
+			chat("📃 | C) Ottawa")
+			wait(2)
+			chat("📃 | D) Montreal")
+		elseif questiotosay == "Which continent is Egypt located in?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Europe")
+			wait(2)
+			chat("📃 | B) Africa")
+			wait(2)
+			chat("📃 | C) Asia")
+			wait(2)
+			chat("📃 | D) Australia")
+		elseif questiotosay == "What is the largest ocean on Earth?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Atlantic")
+			wait(2)
+			chat("📃 | B) Indian")
+			wait(2)
+			chat("📃 | C) Pacific")
+			wait(2)
+			chat("📃 | D) Arctic")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------
+
+function Animal_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Animal Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Animal_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the fastest land animal?", "What animal is known as the 'King of the Jungle'?", "What is the largest species of shark?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the fastest land animal?"] = {
+				"cheetah",
+				"a",
+				"a) cheetah",
+				"a)cheetah",
+				"cheetah"
+			},
+			["What animal is known as the 'King of the Jungle'?"] = {
+				"lion",
+				"b",
+				"b) lion",
+				"b)lion",
+				"lion"
+			},
+			["What is the largest species of shark?"] = {
+				"whale shark",
+				"c",
+				"c) whale shark",
+				"c)whale shark",
+				"whale shark"
+			}
+		}
+
+		if questiotosay == "What is the fastest land animal?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Cheetah")
+			wait(2)
+			chat("📃 | B) Lion")
+			wait(2)
+			chat("📃 | C) Tiger")
+			wait(2)
+			chat("📃 | D) Elephant")
+		elseif questiotosay == "What animal is known as the 'King of the Jungle'?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Elephant")
+			wait(2)
+			chat("📃 | B) Lion")
+			wait(2)
+			chat("📃 | C) Tiger")
+			wait(2)
+			chat("📃 | D) Gorilla")
+		elseif questiotosay == "What is the largest species of shark?" then
+			print("question is ".. questiotosay..".")
+			wait(7)
+			chat("📃 | A) Great White Shark")
+			wait(2)
+			chat("📃 | B) Hammerhead Shark")
+			wait(2)
+			chat("📃 | C) Whale Shark")
+			wait(2)
+			chat("📃 | D) Mako Shark")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+----------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------
+
+function Animal_Quiz_2()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Animal Quiz #2...")
+		local waitthang = math.random(2, 5.6)
+		print("started Animal_Quiz_2.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the fastest land animal?", "What animal has a trunk?", "What animal is known to have the most powerful bite force?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the fastest land animal?"] = {
+				"cheetah",
+				"a",
+				"a) cheetah",
+				"a)cheetah",
+				"cheetah"
+			},
+			["What animal has a trunk?"] = {
+				"elephant",
+				"b",
+				"b) elephant",
+				"b)elephant",
+				"elephant"
+			},
+			["What animal is known to have the most powerful bite force?"] = {
+				"saltwater crocodile",
+				"c",
+				"c) saltwater crocodile",
+				"c)saltwater crocodile",
+				"saltwater crocodile"
+			}
+		}
+
+		if questiotosay == "What is the fastest land animal?" then
+			wait(7)
+			chat("📃 | A) Cheetah")
+			wait(2)
+			chat("📃 | B) Lion")
+			wait(2)
+			chat("📃 | C) Eagle")
+			wait(2)
+			chat("📃 | D) Rabbit")
+		elseif questiotosay == "What animal has a trunk?" then
+			wait(7)
+			chat("📃 | A) Giraffe")
+			wait(2)
+			chat("📃 | B) Elephant")
+			wait(2)
+			chat("📃 | C) Rhino")
+			wait(2)
+			chat("📃 | D) Horse")
+		elseif questiotosay == "What animal is known to have the most powerful bite force?" then
+			wait(7)
+			chat("📃 | A) Great White Shark")
+			wait(2)
+			chat("📃 | B) Hyena")
+			wait(2)
+			chat("📃 | C) Saltwater Crocodile")
+			wait(2)
+			chat("📃 | D) Lion")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+----------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------
+
+function Food_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Food Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Food_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What fruit is yellow and curved?", "What vegetable is orange and long?", "What food is known for being stretchy when melted?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What fruit is yellow and curved?"] = {
+				"banana",
+				"a",
+				"a) banana",
+				"a)banana",
+				"banana"
+			},
+			["What vegetable is orange and long?"] = {
+				"carrot",
+				"b",
+				"b) carrot",
+				"b)carrot",
+				"carrot"
+			},
+			["What food is known for being stretchy when melted?"] = {
+				"cheese",
+				"c",
+				"c) cheese",
+				"c)cheese",
+				"cheese"
+			}
+		}
+
+		if questiotosay == "What fruit is yellow and curved?" then
+			wait(7)
+			chat("📃 | A) Banana")
+			wait(2)
+			chat("📃 | B) Apple")
+			wait(2)
+			chat("📃 | C) Grape")
+			wait(2)
+			chat("📃 | D) Orange")
+		elseif questiotosay == "What vegetable is orange and long?" then
+			wait(7)
+			chat("📃 | A) Potato")
+			wait(2)
+			chat("📃 | B) Carrot")
+			wait(2)
+			chat("📃 | C) Tomato")
+			wait(2)
+			chat("📃 | D) Lettuce")
+		elseif questiotosay == "What food is known for being stretchy when melted?" then
+			wait(7)
+			chat("📃 | A) Chocolate")
+			wait(2)
+			chat("📃 | B) Ice Cream")
+			wait(2)
+			chat("📃 | C) Cheese")
+			wait(2)
+			chat("📃 | D) Bread")
+		end
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------------------------------------
+
+function Food_Quiz_2()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Food Quiz #2...")
+		local waitthang = math.random(2, 5.6)
+		print("started Food_Quiz_2.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What fruit is typically red or green and keeps doctors away?", "What spice is commonly used in Indian cooking?", "What vegetable is known for its high content of vitamin A?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What fruit is typically red or green and keeps doctors away?"] = {
+				"apple",
+				"a",
+				"a) apple",
+				"a)apple",
+				"apple"
+			},
+			["What spice is commonly used in Indian cooking?"] = {
+				"turmeric",
+				"b",
+				"b) turmeric",
+				"b)turmeric",
+				"turmeric"
+			},
+			["What vegetable is known for its high content of vitamin A?"] = {
+				"carrot",
+				"c",
+				"c) carrot",
+				"c)carrot",
+				"carrot"
+			}
+		}
+
+		if questiotosay == "What fruit is typically red or green and keeps doctors away?" then
+			wait(7)
+			chat("📃 | A) Apple")
+			wait(2)
+			chat("📃 | B) Banana")
+			wait(2)
+			chat("📃 | C) Orange")
+			wait(2)
+			chat("📃 | D) Pear")
+		elseif questiotosay == "What spice is commonly used in Indian cooking?" then
+			wait(7)
+			chat("📃 | A) Cinnamon")
+			wait(2)
+			chat("📃 | B) Turmeric")
+			wait(2)
+			chat("📃 | C) Paprika")
+			wait(2)
+			chat("📃 | D) Basil")
+		elseif questiotosay == "What vegetable is known for its high content of vitamin A?" then
+			wait(7)
+			chat("📃 | A) Spinach")
+			wait(2)
+			chat("📃 | B) Carrot")
+			wait(2)
+			chat("📃 | C) Broccoli")
+			wait(2)
+			chat("📃 | D) Lettuce")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Geography_Quiz_2()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Geography Quiz #2...")
+		local waitthang = math.random(2, 5.6)
+		print("started Geography_Quiz_2.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the longest river in the world?", "Which country is known as the 'Land of the Rising Sun'?", "Which continent is Australia located on?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the longest river in the world?"] = {
+				"nile",
+				"a",
+				"a) nile",
+				"a)nile",
+				"nile"
+			},
+			["Which country is known as the 'Land of the Rising Sun'?"] = {
+				"japan",
+				"b",
+				"b) japan",
+				"b)japan",
+				"japan"
+			},
+			["Which continent is Australia located on?"] = {
+				"oceania",
+				"c",
+				"c) oceania",
+				"c)oceania",
+				"oceania"
+			}
+		}
+
+		if questiotosay == "What is the longest river in the world?" then
+			wait(7)
+			chat("📃 | A) Nile")
+			wait(2)
+			chat("📃 | B) Amazon")
+			wait(2)
+			chat("📃 | C) Yangtze")
+			wait(2)
+			chat("📃 | D) Mississippi")
+		elseif questiotosay == "Which country is known as the 'Land of the Rising Sun'?" then
+			wait(7)
+			chat("📃 | A) South Korea")
+			wait(2)
+			chat("📃 | B) Japan")
+			wait(2)
+			chat("📃 | C) China")
+			wait(2)
+			chat("📃 | D) Thailand")
+		elseif questiotosay == "Which continent is Australia located on?" then
+			wait(7)
+			chat("📃 | A) Asia")
+			wait(2)
+			chat("📃 | B) Europe")
+			wait(2)
+			chat("📃 | C) Oceania")
+			wait(2)
+			chat("📃 | D) Africa")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Animal_Quiz_3()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Animal Quiz #3...")
+		local waitthang = math.random(2, 5.6)
+		print("started Animal_Quiz_3.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"Which animal is known for its black and white stripes?", "What animal is the largest mammal on Earth?", "Which animal can change its color to blend into its environment?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["Which animal is known for its black and white stripes?"] = {
+				"zebra",
+				"a",
+				"a) zebra",
+				"a)zebra",
+				"zebra"
+			},
+			["What animal is the largest mammal on Earth?"] = {
+				"blue whale",
+				"b",
+				"b) blue whale",
+				"b)blue whale",
+				"blue whale"
+			},
+			["Which animal can change its color to blend into its environment?"] = {
+				"chameleon",
+				"b",
+				"b) chameleon",
+				"b)chameleon",
+				"chameleon"
+			}
+		}
+
+		if questiotosay == "Which animal is known for its black and white stripes?" then
+			wait(7)
+			chat("📃 | A) Zebra")
+			wait(2)
+			chat("📃 | B) Tiger")
+			wait(2)
+			chat("📃 | C) Giraffe")
+			wait(2)
+			chat("📃 | D) Panda")
+		elseif questiotosay == "What animal is the largest mammal on Earth?" then
+			wait(7)
+			chat("📃 | A) Elephant")
+			wait(2)
+			chat("📃 | B) Blue Whale")
+			wait(2)
+			chat("📃 | C) Giraffe")
+			wait(2)
+			chat("📃 | D) Shark")
+		elseif questiotosay == "Which animal can change its color to blend into its environment?" then
+			wait(7)
+			chat("📃 | A) Octopus")
+			wait(2)
+			chat("📃 | B) Chameleon")
+			wait(2)
+			chat("📃 | C) Squid")
+			wait(2)
+			chat("📃 | D) Frog")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+
+function Science_Quiz_2()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Science Quiz #2...")
+		local waitthang = math.random(2, 5.6)
+		print("started Science_Quiz_2.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What gas do plants absorb from the atmosphere?", "What is the closest planet to the Sun?", "Which part of the plant absorbs water?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What gas do plants absorb from the atmosphere?"] = {
+				"carbon dioxide",
+				"a",
+				"a) carbon dioxide",
+				"a)carbon dioxide",
+				"carbon dioxide"
+			},
+			["What is the closest planet to the Sun?"] = {
+				"mercury",
+				"b",
+				"b) mercury",
+				"b)mercury",
+				"mercury"
+			},
+			["Which part of the plant absorbs water?"] = {
+				"roots",
+				"c",
+				"c) roots",
+				"c)roots",
+				"roots"
+			}
+		}
+
+		if questiotosay == "What gas do plants absorb from the atmosphere?" then
+			wait(7)
+			chat("📃 | A) Carbon Dioxide")
+			wait(2)
+			chat("📃 | B) Oxygen")
+			wait(2)
+			chat("📃 | C) Nitrogen")
+			wait(2)
+			chat("📃 | D) Hydrogen")
+		elseif questiotosay == "What is the closest planet to the Sun?" then
+			wait(7)
+			chat("📃 | A) Venus")
+			wait(2)
+			chat("📃 | B) Mercury")
+			wait(2)
+			chat("📃 | C) Mars")
+			wait(2)
+			chat("📃 | D) Earth")
+		elseif questiotosay == "Which part of the plant absorbs water?" then
+			wait(7)
+			chat("📃 | A) Leaves")
+			wait(2)
+			chat("📃 | B) Stem")
+			wait(2)
+			chat("📃 | C) Roots")
+			wait(2)
+			chat("📃 | D) Flowers")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Animal_Quiz_4()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Animal Quiz #4...")
+		local waitthang = math.random(2, 5.6)
+		print("started Animal_Quiz_4.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"Which animal is known for having a long neck?", "What is the largest species of bear?", "Which animal is famous for its ability to fly?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["Which animal is known for having a long neck?"] = {
+				"giraffe",
+				"a",
+				"a) giraffe",
+				"a)giraffe",
+				"giraffe"
+			},
+			["What is the largest species of bear?"] = {
+				"polar bear",
+				"b",
+				"b) polar bear",
+				"b)polar bear",
+				"polar bear"
+			},
+			["Which animal is famous for its ability to fly?"] = {
+				"bat",
+				"c",
+				"c) bat",
+				"c)bat",
+				"bat"
+			}
+		}
+
+		if questiotosay == "Which animal is known for having a long neck?" then
+			wait(7)
+			chat("📃 | A) Giraffe")
+			wait(2)
+			chat("📃 | B) Elephant")
+			wait(2)
+			chat("📃 | C) Kangaroo")
+			wait(2)
+			chat("📃 | D) Rhino")
+		elseif questiotosay == "What is the largest species of bear?" then
+			wait(7)
+			chat("📃 | A) Brown Bear")
+			wait(2)
+			chat("📃 | B) Polar Bear")
+			wait(2)
+			chat("📃 | C) Panda Bear")
+			wait(2)
+			chat("📃 | D) Grizzly Bear")
+		elseif questiotosay == "Which animal is famous for its ability to fly?" then
+			wait(7)
+			chat("📃 | A) Bat")
+			wait(2)
+			chat("📃 | B) Bird")
+			wait(2)
+			chat("📃 | C) Butterfly")
+			wait(2)
+			chat("📃 | D) Dragonfly")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Science_Quiz_3()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing Science Quiz #3...")
+		local waitthang = math.random(2, 5.6)
+		print("started Science_Quiz_3.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What planet is known as the Red Planet?", "What is the largest organ in the human body?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What planet is known as the Red Planet?"] = {
+				"mars",
+				"b",
+				"b) mars",
+				"b)mars",
+				"mars"
+			},
+			["What is the largest organ in the human body?"] = {
+				"skin",
+				"c",
+				"c) skin",
+				"c)skin",
+				"skin"
+			}
+		}
+
+		if questiotosay == "What planet is known as the Red Planet?" then
+			wait(7)
+			chat("📃 | A) Earth")
+			wait(2)
+			chat("📃 | B) Mars")
+			wait(2)
+			chat("📃 | C) Venus")
+			wait(2)
+			chat("📃 | D) Jupiter")
+		elseif questiotosay == "What is the largest organ in the human body?" then
+			wait(7)
+			chat("📃 | A) Brain")
+			wait(2)
+			chat("📃 | B) Heart")
+			wait(2)
+			chat("📃 | C) Skin")
+			wait(2)
+			chat("📃 | D) Lungs")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Technology_Quiz_1()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing I.T Quiz #1...")
+		local waitthang = math.random(2, 5.6)
+		print("started Technology_Quiz_1.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the name of the first commonly used graphical user interface?", "Which type of software allows users to interact with a computer's hardware?", "What is the term for a small, portable computing device that primarily focuses on internet usage?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the name of the first commonly used graphical user interface?"] = {
+				"windows",
+				"a",
+				"a) windows",
+				"a)windows",
+				"windows"
+			},
+			["Which type of software allows users to interact with a computer's hardware?"] = {
+				"system software",
+				"b",
+				"b) system software",
+				"b)system software",
+				"system software"
+			},
+			["What is the term for a small, portable computing device that primarily focuses on internet usage?"] = {
+				"tablet",
+				"c",
+				"c) tablet",
+				"c)tablet",
+				"tablet"
+			}
+		}
+
+		if questiotosay == "What is the name of the first commonly used graphical user interface?" then
+			wait(7)
+			chat("📃 | A) Windows")
+			wait(2)
+			chat("📃 | B) MacOS")
+			wait(2)
+			chat("📃 | C) Linux")
+			wait(2)
+			chat("📃 | D) Android")
+		elseif questiotosay == "Which type of software allows users to interact with a computer's hardware?" then
+			wait(7)
+			chat("📃 | A) System Software")
+			wait(2)
+			chat("📃 | B) Application Software")
+			wait(2)
+			chat("📃 | C) Development Software")
+			wait(2)
+			chat("📃 | D) Database Software")
+		elseif questiotosay == "What is the term for a small, portable computing device that primarily focuses on internet usage?" then
+			wait(7)
+			chat("📃 | A) Laptop")
+			wait(2)
+			chat("📃 | B) Desktop")
+			wait(2)
+			chat("📃 | C) Tablet")
+			wait(2)
+			chat("📃 | D) Smartphone")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function Technology_Quiz_2()
+	if questions >= 4 then
+		chat("😄 | Looks like We've reached 10 questions! Let's see the results. Announcing in 10s.")
+		wait(15)
+		leadboardtang()
+	else
+		chat("🚀 | Initializing I.T Quiz #2...")
+		local waitthang = math.random(2, 5.6)
+		print("started Technology_Quiz_2.")
+		questions = questions + 1
+		wait(waitthang)
+		print("waited "..waitthang.." seconds.")
+		local quiz1questions = {"What is the term for the process of converting data into a format that can be transmitted over a network?", "Which type of device is designed to store data for long-term use?", "What is the primary function of a web browser?"}
+		local questiotosay = quiz1questions[math.random(#quiz1questions)]
+		chat("📜 | "..questiotosay)
+		local answered = false
+		local questionbool = false
+		local answers = {
+			["What is the term for the process of converting data into a format that can be transmitted over a network?"] = {
+				"encryption",
+				"a",
+				"a) encryption",
+				"a)encryption",
+				"encryption"
+			},
+			["Which type of device is designed to store data for long-term use?"] = {
+				"hard drive",
+				"b",
+				"b) hard drive",
+				"b)hard drive",
+				"hard drive"
+			},
+			["What is the primary function of a web browser?"] = {
+				"view websites",
+				"c",
+				"c) view websites",
+				"c)view websites",
+				"view websites"
+			}
+		}
+
+		if questiotosay == "What is the term for the process of converting data into a format that can be transmitted over a network?" then
+			wait(7)
+			chat("📃 | A) Encryption")
+			wait(2)
+			chat("📃 | B) Compression")
+			wait(2)
+			chat("📃 | C) Decompression")
+			wait(2)
+			chat("📃 | D) Encoding")
+		elseif questiotosay == "Which type of device is designed to store data for long-term use?" then
+			wait(7)
+			chat("📃 | A) Flash Drive")
+			wait(2)
+			chat("📃 | B) Hard Drive")
+			wait(2)
+			chat("📃 | C) RAM")
+			wait(2)
+			chat("📃 | D) Optical Drive")
+		elseif questiotosay == "What is the primary function of a web browser?" then
+			wait(7)
+			chat("📃 | A) Write code")
+			wait(2)
+			chat("📃 | B) View websites")
+			wait(2)
+			chat("📃 | C) Edit images")
+			wait(2)
+			chat("📃 | D) Send emails")
+		end
+
+		local function resetstuff()
+			answered = false
+			questionbool = false
+		end
+		resetstuff()
+
+		for i,v in pairs(game.Players:GetPlayers()) do
+			local thangg2323
+			thangg2323 = v.Chatted:Connect(function(message)
+				for _, answer in pairs(answers[questiotosay]) do
+					if message:lower() == answer:lower() then
+						print("answer is "..answer..".")
+						if not answered then
+							answered = true
+							chat("🎉 | "..v.Name.." Has answered correctly! The answer was ".. answer.."!")
+							if v:FindFirstChild("dd1m20claap25nma") then
+								warn(v.Name.." already has a value which is ".. v.dd1m20claap25nma.Value .. ".")
+							else
+								local valuethingy123 = Instance.new("IntValue")
+								valuethingy123.Name = "dd1m20claap25nma"
+								valuethingy123.Parent = v
+								valuethingy123.Value = 0
+								print(v.Name .. " doesn't have a value. value created for player.")
+							end
+							v:FindFirstChild("dd1m20claap25nma").Value += 1
+							local t = v:FindFirstChild("dd1m20claap25nma")
+							table.insert(leaderboard, {plrname = v.Name, score = t.Value})
+							questionbool = true
+							thangg2323:Disconnect()
+							if t then
+								print(t.Parent.Name .. " has ".. t.Value .. " points.")
+							end
+						end
+					end
+				end
+			end)
+		end
+
+		local timeLimit = 20
+		local timerStart = tick()
+		task.spawn(function()
+			while tick() - timerStart < timeLimit do
+				wait(0.1)
+				if answered then
+					break
+				end
+			end
+			print("answered boolean status: "..tostring(answered))
+			if not answered then
+				warn("no one answered.")
+				chat("😕 | Time's up! No one answered.")
+				questionbool = true
+			else
+				warn("someone answered.")
+			end
+		end)
+
+		repeat
+			wait(0.1)
+		until questionbool == true
+
+		resetstuff()
+
+		wait(20)
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+local function sex2()
+	local player = game.Players.LocalPlayer
+	local walk = player.Character or player.CharacterAdded:Wait()
+	local humanoid = walk:WaitForChild("Humanoid")
+	local humanoidRootPart = walk:WaitForChild("HumanoidRootPart")
+	local pp = {Vector3.new(1, 0, 0), Vector3.new(-1, 0, 0), Vector3.new(0, 0, 1), Vector3.new(0, 0, -1)}
+	local function run(direction, duration)
+		local walky = Instance.new("BodyVelocity")
+		walky.MaxForce = Vector3.new(10000, 10000, 10000)
+		walky.Velocity = direction * humanoid.WalkSpeed
+		walky.Parent = humanoidRootPart
+		local gyro = Instance.new("BodyGyro")
+		gyro.MaxTorque = Vector3.new(400000, 400000, 400000)
+		gyro.CFrame = humanoidRootPart.CFrame
+		gyro.Parent = humanoidRootPart
+		local function gyrochange()
+			gyro.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position + direction)
+		end
+		gyrochange()
+		wait(duration)
+		walky:Destroy()
+		gyro:Destroy()
+	end
+
+	player.CharacterAdded:Connect(function(newCharacter)
+		walk = newCharacter
+		humanoid = walk:WaitForChild("Humanoid")
+		humanoidRootPart = walk:WaitForChild("HumanoidRootPart")
+		spawn(function()
+			while true do
+				pcall(function()
+					local randomdirection = pp[math.random(1, #pp)]
+					local randomtime = math.random(1, 10) + math.random()
+					run(randomdirection, randomtime)
+
+					local waitTime = math.random(1, 3) + math.random()
+					wait(waitTime)
+				end) 
+			end
+		end)
+	end)
+	spawn(function()
+		while true do
+			pcall(function()
+				local randomdirection = pp[math.random(1, #pp)]
+				local randomtime = math.random(1, 10) + math.random()
+				run(randomdirection, randomtime)
+
+				local waitTime = math.random(1, 3) + math.random()
+				wait(waitTime)
+			end) 
+		end
+	end)
+end
+coroutine.wrap(sex2)()
+
+----------------------------------------------------------------------------
+
+chosenquizes = {}
+wowowoow = {
+	"Roblox_Quiz_1",
+	"VideoGame_Quiz_1",
+	"Science_Quiz_1",
+	"Geography_Quiz_1",
+	"Animal_Quiz_1",
+	"Animal_Quiz_2",
+	"Food_Quiz_1",
+	"Food_Quiz_2",
+	"Geography_Quiz_2",
+	"Animal_Quiz_3",
+	"Science_Quiz_2",
+	"Animal_Quiz_4",
+	"Science_Quiz_3",
+	"Technology_Quiz_1",
+	"Technology_Quiz_2"
+}
+function thingy()
+	local availablequizes = {}
+	for _, quiz in ipairs(wowowoow) do
+		if not chosenquizes[quiz] then
+			table.insert(availablequizes, quiz)
+		end
+	end
+
+	if #availablequizes == 0 then
+		leadboardtang()
+		if nooneplayed then
+			warn("game ended. no one played")
+			return
+		end
+	end
+
+	local randomt = math.random(1, #availablequizes)
+	local chosenqz = availablequizes[randomt]
+	chosenquizes[chosenqz] = true
+	startmain(chosenqz)
+end
+
+function startmain(quiz)
+	if quiz == "Roblox_Quiz_1" then
+		Roblox_Quiz_1()
+	elseif quiz == "VideoGame_Quiz_1" then
+		VideoGame_Quiz_1()
+	elseif quiz == "Science_Quiz_1" then
+		Science_Quiz_1()
+	elseif quiz == "Geography_Quiz_1" then
+		Geography_Quiz_1()
+	elseif quiz == "Animal_Quiz_1" then
+		Animal_Quiz_1()
+	elseif quiz == "Animal_Quiz_2" then
+		Animal_Quiz_2()
+	elseif quiz == "Food_Quiz_1" then
+		Food_Quiz_1()
+	elseif quiz == "Food_Quiz_2" then
+		Food_Quiz_2()
+	elseif quiz == "Geography_Quiz_2" then
+		Geography_Quiz_2()
+	elseif quiz == "Animal_Quiz_3" then
+		Animal_Quiz_3()
+	elseif quiz == "Science_Quiz_2" then
+		Science_Quiz_2()
+	elseif quiz == "Animal_Quiz_4" then
+		Animal_Quiz_4()
+	elseif quiz == "Science_Quiz_3" then
+		Science_Quiz_3()
+	elseif quiz == "Technology_Quiz_1" then
+		Technology_Quiz_1()
+	elseif quiz == "Technology_Quiz_2" then
+		Technology_Quiz_2()
+	end
+end
+
+versionn()
+Welcome()
+while true do
+	if nooneplayed then
+		break
+	else
+		thingy()
+	end
+	task.wait()
+end
